@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useGetUserID } from "../hooks/useGetUserID";
 import axios from "axios";
+import { Cookies } from "react-cookie";
+import useSessionStorage from "../hooks/useAuthToken";
+import useAuthToken from "../hooks/useAuthToken";
 
 export const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
-
+  const {token,savToken} = useAuthToken()
   const userID = useGetUserID();
 
   useEffect(() => {
@@ -30,8 +33,9 @@ export const Home = () => {
     };
 
     fetchRecipes();
-    fetchSavedRecipes();
-  }, []);
+    if(token)fetchSavedRecipes();
+    
+  }, [userID]);
 
   const saveRecipe = async (recipeID) => {
     try {
@@ -71,5 +75,6 @@ export const Home = () => {
         ))}
       </ul>
     </div>
+    
   );
 };

@@ -1,3 +1,6 @@
+import useAuthToken from "./useAuthToken";
+
 export const useGetUserID = () => {
-  return window.localStorage.getItem("userID");
+  const {token}= useAuthToken()  
+  return token;
 };

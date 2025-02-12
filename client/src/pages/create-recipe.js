@@ -3,10 +3,12 @@ import axios from "axios";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import useSessionStorage from "../hooks/useAuthToken";
+import useAuthToken from "../hooks/useAuthToken";
 
 export const CreateRecipe = () => {
   const userID = useGetUserID();
-  const [cookies, _] = useCookies(["access_token"]);
+  const {token} = useAuthToken()
   const [recipe, setRecipe] = useState({
     name: "",
     description: "",
@@ -43,7 +45,7 @@ export const CreateRecipe = () => {
         "http://localhost:3001/recipes",
         { ...recipe },
         {
-          headers: { authorization: cookies.access_token },
+          headers: { authorization: token },
         }
       );
 
