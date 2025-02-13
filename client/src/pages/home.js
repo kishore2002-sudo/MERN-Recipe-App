@@ -8,8 +8,8 @@ import useAuthToken from "../hooks/useAuthToken";
 export const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
-  const {token,savToken} = useAuthToken()
-  const userID = useGetUserID();
+  const token = sessionStorage.getItem("token")
+  const userID = sessionStorage.getItem("userID");
 
   useEffect(() => {
     const fetchRecipes = async () => {

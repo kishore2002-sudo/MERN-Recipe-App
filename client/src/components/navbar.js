@@ -10,35 +10,24 @@ const Navbar = () => {
 
   const logout = () => {
     
-    removeToken()
+    sessionStorage.removeItem("token")
+    sessionStorage.removeItem("userID")
     navigate("/auth");
   };
-  const {getToken} = useAuthToken()
+  const token = sessionStorage.getItem("token")
 
   
   return (
     <div className="navbar">
-      
-      
-      
       <Link to="/">Home</Link>
-        
-          
-           <Link to="/auth">Login/Register</Link>
-          
-      <Link to="/create-recipe">Create Recipe</Link>
+      {!token?(<>
+        <Link to="/auth">Login/Register</Link>
+      </>):(<>
+        <Link to="/create-recipe">Create Recipe</Link>
         <Link to="/saved-recipes">Saved Recipes</Link>
         <button onClick={logout}> Logout </button>
-     
-       
+      </>)}     
         
-        
-        
-     
-        
-        
-        
-    
     </div>
   );
 };

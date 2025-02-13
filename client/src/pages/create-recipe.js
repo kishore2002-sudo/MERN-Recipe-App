@@ -7,8 +7,8 @@ import useSessionStorage from "../hooks/useAuthToken";
 import useAuthToken from "../hooks/useAuthToken";
 
 export const CreateRecipe = () => {
-  const userID = useGetUserID();
-  const {token} = useAuthToken()
+  const userID = sessionStorage.getItem("userID");
+  const token = sessionStorage.getItem("token")
   const [recipe, setRecipe] = useState({
     name: "",
     description: "",

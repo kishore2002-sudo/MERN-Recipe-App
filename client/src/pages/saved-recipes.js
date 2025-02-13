@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const SavedRecipes = () => {
   const [savedRecipes, setSavedRecipes] = useState([]);
-  const userID = useGetUserID();
+  const userID = sessionStorage.getItem("userID")
 
   useEffect(() => {
     const fetchSavedRecipes = async () => {

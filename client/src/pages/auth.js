@@ -30,8 +30,10 @@ const Login = () => {
         password,
       });
 
-      saveToken(result.data.token);
-      window.localStorage.setItem("userID", result.data.userID);
+      sessionStorage.setItem("token",result.data.token)
+      sessionStorage.setItem("userID", result.data.userID);
+      
+      
       navigate("/");
     } catch (error) {
       console.error(error);
